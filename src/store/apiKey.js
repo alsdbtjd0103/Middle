@@ -1,0 +1,1 @@
+export const kakaoApiKey = '1636fa36ce2297ab2103c23000b70646';

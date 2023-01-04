@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { createContext } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import FindPage from "./pages/FindPage";
+import MainPage from "./pages/MainPage";
+import TempPage from "./pages/TempPage";
+import UserContextProvider from "./store/UserContext";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path='/find' element={<FindPage />} />
+          <Route path='/temp' element={<TempPage />} />
+        </Routes>
+      </BrowserRouter>
+    </UserContextProvider>
   );
 }
 
