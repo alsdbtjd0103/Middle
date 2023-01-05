@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useState,useEffect } from "react";
 import styled from "styled-components";
 import InputModal from "../components/InputModal";
 import { UserContext } from "../store/UserContext";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function MainPage() {
   const userCtx = useContext(UserContext);
   const [open, setOpen] = useState(false);
@@ -18,7 +18,11 @@ function MainPage() {
       alert("두 개 이상 등록해주세요!");
       return;
     }
-    navigation("/find");
+    var queryString = '/find';
+    // userCtx.users.map((user) => queryString+=`id=${user.info.id}&`)
+    // queryString = queryString.substring(0,queryString.length-1);
+    // console.log(queryString);
+    navigation(queryString);
     return;
   };
 
@@ -180,6 +184,8 @@ const StyledList = styled.ul`
   list-style-type: none;
   flex-direction: column;
   margin-top: 10px;
+  overflow: scroll;
+  height:35%;
 `;
 
 const StyledItem = styled.li`
