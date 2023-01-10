@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 import { MdArrowBackIos } from "react-icons/md";
-export default function FindHeader({onClick}) {
+export default function FindHeader({onClick,title}) {
   return (
     <StyleHeader>
       <MdArrowBackIos style={{ position: "fixed", left: "20px" }} size={20} onClick={onClick}/>
-      <span>중간장소 찾기</span>
+      <span>{title}</span>
     </StyleHeader>
   );
 }

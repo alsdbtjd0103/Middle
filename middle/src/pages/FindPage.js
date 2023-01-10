@@ -30,7 +30,7 @@ function FindPage(){
 
     return(
         <StyledContainer>
-            <FindHeader onClick={goBack}/>
+            <FindHeader onClick={goBack} title={'중간장소 찾기'}/>
             <MapContainer />
         </StyledContainer>
     )
