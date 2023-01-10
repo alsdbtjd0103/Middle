@@ -5,6 +5,7 @@ import { UserContext } from "../store/UserContext";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import Marker from "../components/Marker";
 function MainPage() {
   const userCtx = useContext(UserContext);
   const [open, setOpen] = useState(false);
@@ -33,6 +34,7 @@ function MainPage() {
 
   return (
     <RootContainer>
+      
       <StyledHeader>우리 지금 만나</StyledHeader>
 
       <BannerText>

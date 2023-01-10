@@ -80,6 +80,7 @@ function InputModal({ isOpen, setOpen }) {
           flexDirection: "column",
           height: "min-content",
           padding: 0,
+          
         },
         overlay: {
           position: "fixed",
@@ -91,7 +92,7 @@ function InputModal({ isOpen, setOpen }) {
         },
       }}
     >
-      <form style={{ padding: "20px 20px 0px 20px" }}>
+      <form style={{ padding: "20px 20px 0px 20px"}}>
         <StyledLabel>
           이름
           <StyledInput
@@ -103,7 +104,7 @@ function InputModal({ isOpen, setOpen }) {
         </StyledLabel>
         <StyledLabel>
           지역
-          <div style={{ display: "flex", flexDirection: "row" }}>
+          <div style={{ display: "flex", flexDirection: "row",padding:0,margin:0}}>
             <StyledInput
               type={"text"}
               onChange={(e) => setRegion((previous) => e.target.value)}
@@ -150,7 +151,6 @@ function InputModal({ isOpen, setOpen }) {
 export default InputModal;
 
 const StyledInput = styled.input`
-  width: 90%;
   height: 20px;
   border-width: 0px;
   border-bottom-width: 1px;
@@ -160,6 +160,7 @@ const StyledInput = styled.input`
   margin-top: 10px;
   font-size: 15px;
   outline: none;
+  width:90%;
   :hover {
     box-shadow: 0 5px 5px -5px #b8f2f7;
   }
@@ -171,12 +172,14 @@ const StyledLabel = styled.label`
   flex-direction: column;
   color: gray;
   height: 70px;
+  
 `;
 
 const StyledBsSearch = styled.div`
   position: relative;
   right: 20px;
   top: 7px;
+  border-style: none;
 `;
 
 const StyledList = styled.ul`
@@ -186,6 +189,9 @@ const StyledList = styled.ul`
   list-style-type: none;
   max-height: 150px;
   overflow: scroll;
+  :hover{
+
+  }
 `;
 
 const StyledItem = styled.div`
