@@ -11,11 +11,13 @@ function FindPage(){
     const navigation=useNavigate();
     
     useEffect(() => {        
-        if (userCtx.users.length<2){            
-            navigation("/");
-            return
+        if (userCtx.users.length<2){  
+            window.kakao.maps.load(() => {
+                navigation("/");
+            })          
+
         }
-    },[])
+    })
 
     return(
         <StyledContainer>

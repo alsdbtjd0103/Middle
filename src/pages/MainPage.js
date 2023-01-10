@@ -27,10 +27,6 @@ function MainPage() {
     return;
   };
 
-  const tempHandler = () => {
-    navigation("/temp");
-    return;
-  }
 
   return (
     <RootContainer>
