@@ -31,3 +31,8 @@ export function GetAddressList(searchPlace, setList) {
 }
 
 
+export function searchPath(id){
+    window.kakao.maps.load(() => {
+        const url = `https://map.kakao.com/link/to/${id}`;
+    })
+}
