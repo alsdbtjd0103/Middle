@@ -2,6 +2,7 @@
 import { useContext, useEffect,useState } from 'react';
 import { useNavigate, } from 'react-router-dom';
 import styled from 'styled-components';
+import FindHeader from '../components/FindHeader';
 import MapContainer from '../components/MapContainer';
 import { UserContext } from '../store/UserContext';
 
@@ -9,11 +10,19 @@ import { UserContext } from '../store/UserContext';
 function FindPage(){
     const userCtx = useContext(UserContext);
     const navigation=useNavigate();
+
+    function goBack(){
+        navigation(-1);
+    }
+
+    function goHome(){
+        navigation("/")
+    }
     
     useEffect(() => {        
         if (userCtx.users.length<2){  
             window.kakao.maps.load(() => {
-                navigation("/");
+                goHome();
             })          
 
         }
@@ -21,7 +30,7 @@ function FindPage(){
 
     return(
         <StyledContainer>
-            <StyleHeader>중간장소 찾기</StyleHeader>
+            <FindHeader onClick={goBack}/>
             <MapContainer />
         </StyledContainer>
     )
@@ -38,10 +47,3 @@ const StyledContainer = styled.div`
     height:100vh;
 `
 
-const StyleHeader = styled.div`
-    width:100%;
-    height:30px;
-    background-color: white;
-    color: black;
-    text-align: center;
-`
