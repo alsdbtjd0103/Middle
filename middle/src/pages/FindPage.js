@@ -12,7 +12,7 @@ function FindPage(){
     const navigation=useNavigate();
 
     function goBack(){
-        navigation(-1);
+        navigation(-1); 
     }
 
     function goHome(){
