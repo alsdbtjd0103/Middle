@@ -8,12 +8,13 @@ import { Average_Algorithm } from "../util/Mid_Algorithm";
 
 export default function MapContainer() {
   const userCtx = useContext(UserContext);
-  const [placeCount, setPlaceCount] = useState(1); //표시할 장소의 최대 개수
+  const [placeCount, setPlaceCount] = useState(10); //표시할 장소의 최대 개수
   const [placeList, setPlaceList] = useState([]);
   const [kakaoMap, setKakaoMap] = useState(null);
   const [NoPlace, setNoPlace] = useState(false);
   const [tempuser, settempuser] = useState([]);
   const [placeIndex,setPlaceIndex] = useState(0);
+  const [radius,setRadius] = useState(2000); //중간좌표로부터의 장소를 검색할 반경 거리 m -> 촤대 10000m로 설정
 
   const markerColor = {
     0: "F56BFF",
@@ -81,7 +82,7 @@ export default function MapContainer() {
           //좌표를 이용해서 그 좌표 주위 장소를 구함
           var ps = new window.kakao.maps.services.Places();
           ps.categorySearch(code, placesSearchCB, {
-            radius: 2000,
+            radius: radius,
             location: coord,
             sort: window.kakao.maps.services.SortBy.DISTANCE,
           });
@@ -90,11 +91,6 @@ export default function MapContainer() {
 
           function placesSearchCB(data, status, pagination) {
             if (status === window.kakao.maps.services.Status.OK) {
-              if (data.length === 0) {
-                setNoPlace(true);
-                console.log("No Place");
-                return;
-              }
               let datas = [];
               for (var i = 0; i < data.length; i++) {
                 if (i < placeCount) {
@@ -103,7 +99,17 @@ export default function MapContainer() {
                 }
               }
             } else {
-              console.log("addresstoplace error");
+              console.log("addresstoplace error",status);
+              if (status === window.kakao.maps.services.Status.ZERO_RESULT){
+                // setNoPlace(true);
+                // console.log("No Place");
+                console.log(radius);
+                if (radius>10000){
+                  console.log('중간 지점 장소가 없습니다.')
+                }
+                setRadius((previous) => previous+1000);
+                
+              }
             }
           }
           return;
@@ -201,7 +207,7 @@ export default function MapContainer() {
     if (kakaoMap) {
       getPlaceList();
     }
-  }, [kakaoMap]);
+  }, [kakaoMap,radius]);
 
   useEffect(() => {
     if (NoPlace) {
