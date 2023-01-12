@@ -6,6 +6,8 @@ import { UserContext } from "../store/UserContext";
 
 import { Average_Algorithm } from "../util/Mid_Algorithm";
 
+import axios from'axios';
+
 export default function MapContainer() {
   const userCtx = useContext(UserContext);
   const [placeCount, setPlaceCount] = useState(10); //표시할 장소의 최대 개수
@@ -13,8 +15,8 @@ export default function MapContainer() {
   const [kakaoMap, setKakaoMap] = useState(null);
   const [NoPlace, setNoPlace] = useState(false);
   const [tempuser, settempuser] = useState([]);
-  const [placeIndex,setPlaceIndex] = useState(0);
-  const [radius,setRadius] = useState(2000); //중간좌표로부터의 장소를 검색할 반경 거리 m -> 촤대 10000m로 설정
+  const [placeIndex, setPlaceIndex] = useState(0);
+  const [radius, setRadius] = useState(2000); //중간좌표로부터의 장소를 검색할 반경 거리 m -> 촤대 10000m로 설정
 
   const markerColor = {
     0: "F56BFF",
@@ -99,16 +101,15 @@ export default function MapContainer() {
                 }
               }
             } else {
-              console.log("addresstoplace error",status);
-              if (status === window.kakao.maps.services.Status.ZERO_RESULT){
+              console.log("addresstoplace error", status);
+              if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
                 // setNoPlace(true);
                 // console.log("No Place");
                 console.log(radius);
-                if (radius>10000){
-                  console.log('중간 지점 장소가 없습니다.')
+                if (radius > 10000) {
+                  console.log("중간 지점 장소가 없습니다.");
                 }
-                setRadius((previous) => previous+1000);
-                
+                setRadius((previous) => previous + 1000);
               }
             }
           }
@@ -122,7 +123,7 @@ export default function MapContainer() {
         for (var i = 0; i < userList.length; i++) {
           var imageSrc = `image/marker_${markerColor[i]}.png`, // 마커이미지의 주소입니다
             imageSize = new window.kakao.maps.Size(48, 49), // 마커이미지의 크기입니다
-            imageOption = {offset: new window.kakao.maps.Point(26, 40)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+            imageOption = { offset: new window.kakao.maps.Point(26, 40) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
           // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
           var markerImage = new window.kakao.maps.MarkerImage(
@@ -160,12 +161,14 @@ export default function MapContainer() {
 
   function drawingPath(index) {
     window.kakao.maps.load(() => {
-      var polyline;
-      console.log(placeList)
-      var placeLatlng = new window.kakao.maps.LatLng(placeList[index].y, placeList[index].x);
+      console.log(placeList);
+      var placeLatlng = new window.kakao.maps.LatLng(
+        placeList[index].y,
+        placeList[index].x
+      );
       for (var i = 0; i < tempuser.length; i++) {
-        var strokeColor =`#${markerColor[i]}`; 
-        polyline = new window.kakao.maps.Polyline({
+        var strokeColor = `#${markerColor[i]}`;
+        var polyline = new window.kakao.maps.Polyline({
           map: kakaoMap,
           path: [tempuser[i].latlng, placeLatlng],
           strokeWeight: 3,
@@ -174,7 +177,6 @@ export default function MapContainer() {
           strokeStyle: "solid",
         });
       }
-      
     });
   }
 
@@ -207,7 +209,7 @@ export default function MapContainer() {
     if (kakaoMap) {
       getPlaceList();
     }
-  }, [kakaoMap,radius]);
+  }, [kakaoMap, radius]);
 
   useEffect(() => {
     if (NoPlace) {
@@ -225,10 +227,32 @@ export default function MapContainer() {
     if (placeList.length > 0 && tempuser.length > 0) {
       drawingPath(placeIndex);
     }
-  }, [tempuser, placeList,placeIndex]);
+  }, [tempuser, placeList, placeIndex]);
+
+  async function findApi(){
+    console.log('axios start')
+    const response = await axios.post('http://localhost:4000/api/path',{
+      start:tempuser[0].info,
+      end:placeList[0],
+    })
+    console.log('axios end',response.data);
+
+  }
 
   return (
     <>
+      {/* <div
+        style={{
+          borderStyle: "solid",
+          width: "100px",
+          height: "100px",
+          zIndex: "999",
+          backgroundColor: "black",
+        }}
+        onClick={findApi}
+      >
+        <span style={{color:'white'}}>찾기</span>
+      </div> */}
       <div
         id="kakaoMap"
         style={{

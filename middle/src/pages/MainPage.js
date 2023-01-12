@@ -1,14 +1,15 @@
-import { useContext, useState,useEffect } from "react";
-import styled from "styled-components";
+import { useContext, useState, useEffect } from "react";
+import styled, { keyframes } from "styled-components";
 import InputModal from "../components/InputModal";
 import { UserContext } from "../store/UserContext";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-
+import Snowfall from 'react-snowfall';
 function MainPage() {
   const userCtx = useContext(UserContext);
   const [open, setOpen] = useState(false);
+  
   const navigation = useNavigate();
   const ModalHandler = () => {
     setOpen((previous) => !previous);
@@ -19,7 +20,7 @@ function MainPage() {
       alert("두 개 이상 등록해주세요!");
       return;
     }
-    var queryString = '/find';
+    var queryString = "/find";
     // userCtx.users.map((user) => queryString+=`id=${user.info.id}&`)
     // queryString = queryString.substring(0,queryString.length-1);
     // console.log(queryString);
@@ -28,10 +29,20 @@ function MainPage() {
   };
 
 
+
+
+
+
   return (
-    <RootContainer>
-      
+    <RootContainer id="rootContainer">
       <StyledHeader>우리 지금 만나</StyledHeader>
+      <Snowfall style={{
+        
+      }}
+      snowflakeCount={100}
+      wind={[-0.1,0.1]}
+      
+      />
 
       <BannerText>
         <span>우리</span>
@@ -152,6 +163,8 @@ const BannerText = styled.div`
   justify-content: space-evenly;
   padding: 20px;
   height: 200px;
+  color: white;
+  background-color: black;
 `;
 
 const ButtonContainer = styled.div`
@@ -183,7 +196,7 @@ const StyledList = styled.ul`
   flex-direction: column;
   margin-top: 10px;
   overflow: scroll;
-  height:35%;
+  height: 35%;
 `;
 
 const StyledItem = styled.li`
