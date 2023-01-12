@@ -31,8 +31,6 @@ function MainPage() {
 
 
 
-
-
   return (
     <RootContainer id="rootContainer">
       <StyledHeader>우리 지금 만나</StyledHeader>
@@ -41,6 +39,7 @@ function MainPage() {
       }}
       snowflakeCount={100}
       wind={[-0.1,0.1]}
+      speed={[1.0,2.0]}
       
       />
 
