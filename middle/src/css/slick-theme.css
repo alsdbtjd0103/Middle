@@ -120,16 +120,18 @@
 
 .slick-dots
 {
-    position: absolute;
-    bottom: -25px;
+    position: inherit;
+    
     pointer-events: none;
-    display: block;
-
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
     width: 100%;
     padding: 0;
     margin: 0;
-
-    list-style: none;
+    margin-top: 10px;
+    list-style:none;
     
     text-align: center;
 }

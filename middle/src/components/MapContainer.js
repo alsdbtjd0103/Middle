@@ -269,11 +269,11 @@ export default function MapContainer() {
       <div style={{
         width:'95%',
         height:'30%',
-        marginTop:'10px',
+        marginTop:'20px',
         marginBottom:'50px',
         
       }}>
-        <InformationSlider />
+        <InformationSlider placeList={placeList}/>
         
       </div>
     </StyledContainer>
