@@ -12,7 +12,7 @@ export default function InformationSlider() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows:false,
-    
+    dots:true,
 
 
   };
