@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import InputModal from "../components/InputModal";
 import { UserContext } from "../store/UserContext";
 import { AiFillPlusCircle } from "react-icons/ai";
@@ -7,10 +7,13 @@ import { FiX } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import Snowfall from "react-snowfall";
 import {motion} from 'framer-motion';
+
+
 function MainPage() {
+  
   const userCtx = useContext(UserContext);
   const [open, setOpen] = useState(false);
-
+  
   const navigation = useNavigate();
   const ModalHandler = () => {
     setOpen((previous) => !previous);

@@ -22,7 +22,7 @@ export default function InformationSlider({placeList,setPlaceIndex,polylines}) {
     
     <Slider {...settings}>
         {placeList.map((place,index) => {
-            if(index<6){
+            if(index<5){
             return <InformationBox key={index} place={place} distance={polylines}/>
         }
         })}

@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { kakaoApiKey } from "../store/apiKey";
+
 import { UserContext } from "../store/UserContext";
 
 import { Average_Algorithm } from "../util/Mid_Algorithm";
 
 import axios from'axios';
-import InformationBox from "./InformationBox";
+
 import styled from "styled-components";
 import InformationSlider from "./InformationSlider";
 import { MdPassword } from "react-icons/md";

@@ -1,7 +1,9 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { UserContext } from "../store/UserContext";
-
+import {IoNavigateCircleOutline} from 'react-icons/io5';
+import {RiKakaoTalkFill} from 'react-icons/ri';
+import { ShareKakao } from "../util/ShareKakao";
 export default function InformationBox({ place, distance }) {
 
     const userCtx = useContext(UserContext);
@@ -15,10 +17,32 @@ export default function InformationBox({ place, distance }) {
             return distance+'m'
         }
     }
+
+    const link = `https://map.kakao.com/link/to/${place.id}`
     
   return (
     <BoxContainer number={users.length}>
-      <div style={{ fontSize: "18px", fontStyle: "bold" }}>{place.place_name}</div>
+        <div style={{
+            display:'flex',
+            justifyContent:'space-between',
+            alignItems:'flex-end'
+        }}>
+      <span style={{ fontSize: "18px", fontStyle: "bold" }}>{place.place_name}</span>
+      <div style={{
+        display:'flex',
+        
+      }}>
+      <StyledButton href={link}>
+      <IoNavigateCircleOutline style={{paddingRight:'3px'}} color="black" size={22}></IoNavigateCircleOutline>
+        길찾기
+        </StyledButton>
+      <StyledButton>|</StyledButton>
+      
+      <StyledButton onClick={() => ShareKakao(link,`${place.place_name}`)}>
+      <RiKakaoTalkFill  style={{paddingRight:'3px'}} color="black" size={22}/>
+        공유하기</StyledButton>
+      </div>
+      </div>
 
       <span style={{ fontSize: "13px", color: "#9a9a9a" }}>{place.address_name}</span>
       
@@ -30,7 +54,7 @@ export default function InformationBox({ place, distance }) {
             <img width={25} height={25} src={`image/marker_${markerColor[index]}.png`} alt={`${user.name}'s image`}></img>
             <span style={{fontSize:'13px',opacity:0.8}}>{user.name}</span>
             </div>
-            <span style={{ fontSize: "13px", color: "#9a9a9a" }}>{distance.length>0 ? distanceCalc(parseInt(distance[index].getLength())) : null}</span>
+            <span style={{ fontSize: "13px", color: "#9a9a9a" }}>{distance.length>0 ? distanceCalc(parseInt(distance[index].getLength())) : ''}</span>
         </StyledUser>
         )
       })}
@@ -56,6 +80,7 @@ const UserContainer = styled.div`
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    
 `
 
 const BoxContainer = styled.div`
@@ -71,11 +96,7 @@ const BoxContainer = styled.div`
   overflow: scroll;
   cursor: pointer;
   opacity: 1;
-  @media (min-width:800px){
-    &:hover{
-    opacity: 0.9;
-  }
-  }
+
 
   overflow: ${props => props.number>4 ? 'scroll' : 'hidden'};
 
@@ -90,6 +111,22 @@ const StyledUser=styled.span`
     margin:0;
     padding-top:14px;
     padding-left: 5px;
-    
+`
 
+const StyledButton=styled.a`
+   display: flex;
+   justify-content: center;
+   align-items: center;
+    font-size: 12px;
+    color:#676767;
+    margin:0;
+    text-align: center;
+    padding: 0 5px;
+    cursor: pointer;
+    text-decoration: none;
+    @media (min-width:800px){
+    &:hover{
+    opacity: 0.7;
+  }
+  }
 `
