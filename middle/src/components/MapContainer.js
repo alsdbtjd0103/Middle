@@ -313,7 +313,7 @@ export default function MapContainer() {
         marginBottom:'50px',
         
       }}>
-        <InformationSlider placeList={placeList} setPlaceIndex={setPlaceIndex}/>
+        <InformationSlider placeList={placeList} setPlaceIndex={setPlaceIndex} polylines={polylines}/>
         
       </div>
     </StyledContainer>

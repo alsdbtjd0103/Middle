@@ -7,12 +7,21 @@ export default function InformationBox({ place, distance }) {
     const userCtx = useContext(UserContext);
     const users = userCtx.users;
     
+    const distanceCalc = (distance) => {
+        if (distance>=1000){
+            return distance/1000+'km'
+        }
+        else{
+            return distance+'m'
+        }
+    }
+    
   return (
     <BoxContainer number={users.length}>
       <div style={{ fontSize: "18px", fontStyle: "bold" }}>{place.place_name}</div>
 
       <span style={{ fontSize: "13px", color: "#9a9a9a" }}>{place.address_name}</span>
-      <span style={{ fontSize: "13px", color: "#9a9a9a" }}>{distance}</span>
+      
       <UserContainer>
       {users.map((user,index) => {
         return(
@@ -21,6 +30,7 @@ export default function InformationBox({ place, distance }) {
             <img width={25} height={25} src={`image/marker_${markerColor[index]}.png`} alt={`${user.name}'s image`}></img>
             <span style={{fontSize:'13px',opacity:0.8}}>{user.name}</span>
             </div>
+            <span style={{ fontSize: "13px", color: "#9a9a9a" }}>{distance.length>0 ? distanceCalc(parseInt(distance[index].getLength())) : null}</span>
         </StyledUser>
         )
       })}
