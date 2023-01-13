@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import FindHeader from '../components/FindHeader';
 import MapContainer from '../components/MapContainer';
 import { UserContext } from '../store/UserContext';
+import {motion} from 'framer-motion';
 
 
 function FindPage(){
@@ -29,7 +30,11 @@ function FindPage(){
     })
 
     return(
-        <StyledContainer>
+        <StyledContainer
+        initial={{x:window.innerWidth}}
+        animate={{x:0,transition:{duration:0.1}}} 
+        // exit={{x:0,transition:{duration:0.1}}}
+        >
             <FindHeader onClick={goBack} title={'중간장소 찾기'}/>
             <MapContainer />
         </StyledContainer>
@@ -38,7 +43,7 @@ function FindPage(){
 
 export default FindPage;
 
-const StyledContainer = styled.div`
+const StyledContainer = styled(motion.div)`
     position: fixed;
     top:0;
     left:0;

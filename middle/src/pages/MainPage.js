@@ -5,11 +5,12 @@ import { UserContext } from "../store/UserContext";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import Snowfall from 'react-snowfall';
+import Snowfall from "react-snowfall";
+import {motion} from 'framer-motion';
 function MainPage() {
   const userCtx = useContext(UserContext);
   const [open, setOpen] = useState(false);
-  
+
   const navigation = useNavigate();
   const ModalHandler = () => {
     setOpen((previous) => !previous);
@@ -28,28 +29,28 @@ function MainPage() {
     return;
   };
 
-
-
-
   return (
-    <RootContainer id="rootContainer">
+    
+    <RootContainer 
+    initial={{width:'0%'}}
+    animate={{width:'100%',}} 
+    exit={{x:window.innerWidth,transition:{duration:0.1}}}
+    id="rootContainer">
       <StyledHeader>우리 지금 만나</StyledHeader>
-      <Snowfall style={{
-        
-      }}
-      snowflakeCount={100}
-      wind={[-0.1,0.1]}
-      speed={[1.0,2.0]}
-      
+      <Snowfall
+        style={{}}
+        snowflakeCount={100}
+        wind={[-0.1, 0.1]}
+        speed={[1.0, 2.0]}
       />
 
       <BannerText>
-        <span>우리</span>
+        <span>우리 . . .</span>
         <span>지금 만나</span>
       </BannerText>
 
       <InputModal isOpen={open} setOpen={ModalHandler} />
-      <hr style={{ width: "100%" }}></hr>
+
       <ButtonContainer
         style={{ justifyContent: "flex-end", padding: "10px 20px 0px 0px" }}
       >
@@ -129,12 +130,13 @@ function MainPage() {
         <SearchButton onClick={submitHandler}>중간 찾기</SearchButton>
       </ButtonContainer>
     </RootContainer>
+    
   );
 }
 
 export default MainPage;
 
-const RootContainer = styled.div`
+const RootContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   position: fixed;
