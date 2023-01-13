@@ -144,7 +144,7 @@ const RootContainer = styled(motion.div)`
   flex-direction: column;
   position: fixed;
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   top: 0;
   left: 0;
   box-sizing: border-box;
