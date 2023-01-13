@@ -129,7 +129,7 @@ function MainPage() {
         })}
       </StyledList>
 
-      <ButtonContainer>
+      <ButtonContainer style={{position:'fixed',bottom:0}}>
         <SearchButton onClick={submitHandler}>중간 찾기</SearchButton>
       </ButtonContainer>
     </RootContainer>
@@ -149,6 +149,8 @@ const RootContainer = styled(motion.div)`
   left: 0;
   box-sizing: border-box;
   background-color: white;
+
+  scroll-behavior: none;
 `;
 const StyledHeader = styled.header`
   display: flex;
@@ -176,9 +178,13 @@ const ButtonContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
-  :hover {
+  @media(min-width: 800px) {
+    &:hover {
     opacity: 0.75;
   }
+    
+  }
+
 `;
 
 const SearchButton = styled.button`
@@ -200,7 +206,7 @@ const StyledList = styled.ul`
   flex-direction: column;
   margin-top: 10px;
   overflow: scroll;
-  height: 35%;
+  height: 30vh;
 `;
 
 const StyledItem = styled.li`
