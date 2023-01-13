@@ -117,7 +117,7 @@ function InputModal({ isOpen, setOpen }) {
               }}
             ></StyledInput>
             <StyledBsSearch>
-              <BsSearch style={{ cursor: "pointer" }} onClick={searchHandler} />
+              <BsSearch style={{ cursor: "pointer" }} onClick={searchHandler} size={15}/>
             </StyledBsSearch>
           </div>
         </StyledLabel>
