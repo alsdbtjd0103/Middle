@@ -303,7 +303,7 @@ export default function MapContainer() {
           height: "65%",
           borderRadius:'20px',
           zIndex:1,
-          margin:'10px 5px 5px 10px'
+          
         }}
       ></div>
       <div style={{

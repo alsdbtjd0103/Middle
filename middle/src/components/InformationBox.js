@@ -25,7 +25,7 @@ export default function InformationBox({ place, distance }) {
       <UserContainer>
       {users.map((user,index) => {
         return(
-        <StyledUser>
+        <StyledUser key={index}>
             <div style={{display:'flex',flexDirection:'row',alignItems:'center'}}>
             <img width={25} height={25} src={`image/marker_${markerColor[index]}.png`} alt={`${user.name}'s image`}></img>
             <span style={{fontSize:'13px',opacity:0.8}}>{user.name}</span>
@@ -66,7 +66,7 @@ const BoxContainer = styled.div`
   background-color: #ffffff;
   box-shadow: 0 3px 8px rgb(0 0 0 / 20%);
   border-radius: 20px;
-  padding: 15px 15px 20px 10px;
+  padding: 15px 15px 20px 15px;
   flex-direction: column;
   overflow: scroll;
   cursor: pointer;
