@@ -9,7 +9,7 @@ export default function InformationBox({ place, distance }) {
     
     const distanceCalc = (distance) => {
         if (distance>=1000){
-            return distance/1000+'km'
+            return (distance/1000).toFixed(1)+'km'
         }
         else{
             return distance+'m'
