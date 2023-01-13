@@ -10,15 +10,19 @@ import axios from'axios';
 import InformationBox from "./InformationBox";
 import styled from "styled-components";
 import InformationSlider from "./InformationSlider";
+import { MdPassword } from "react-icons/md";
 
 export default function MapContainer() {
   const userCtx = useContext(UserContext);
   const [placeCount, setPlaceCount] = useState(10); //표시할 장소의 최대 개수
+  const [placeIndex, setPlaceIndex] = useState(0);
   const [placeList, setPlaceList] = useState([]);
   const [kakaoMap, setKakaoMap] = useState(null);
   const [NoPlace, setNoPlace] = useState(false);
   const [tempuser, settempuser] = useState([]);
-  const [placeIndex, setPlaceIndex] = useState(0);
+  const [polylines,setPolylines] = useState([]);
+  const [placeOverlay,setPlaceOverlay ] = useState();
+  
   const [radius, setRadius] = useState(2000); //중간좌표로부터의 장소를 검색할 반경 거리 m -> 촤대 10000m로 설정
 
   const markerColor = {
@@ -164,12 +168,14 @@ export default function MapContainer() {
 
   function drawingPath(index) {
     window.kakao.maps.load(() => {
-      console.log(placeList);
+    
       var placeLatlng = new window.kakao.maps.LatLng(
         placeList[index].y,
         placeList[index].x
       );
+      var polys = [];
       for (var i = 0; i < tempuser.length; i++) {
+
         var strokeColor = `#${markerColor[i]}`;
         var polyline = new window.kakao.maps.Polyline({
           map: kakaoMap,
@@ -179,25 +185,45 @@ export default function MapContainer() {
           strokeOpacity: 0.8,
           strokeStyle: "solid",
         });
+        
+        polys.push(polyline);
       }
+      setPolylines((lines) => {
+        if(lines.length>0){
+          lines.map((line) => {
+            line.setMap(null);
+          })
+        }
+        return polys;
+      });
+ 
+
     });
   }
 
-  function putPlaceMarker() {
+  function putPlaceMarker(placeIndex) {
+    console.log(placeList)
     window.kakao.maps.load(() => {
       for (var i = 0; i < placeList.length; i++) {
         // 배열의 좌표들이 잘 보이게 마커를 지도에 추가합니다
+        if(i!==placeIndex){
+          continue
+        }
         var latlng = new window.kakao.maps.LatLng(
           placeList[i].y,
           placeList[i].x
         );
-
+        
         var overlay = new window.kakao.maps.CustomOverlay({
-          content: `<div style="font-color:black;border-radius:10px;opacity:0.8;font-size:10px;background-color:white;width:50px;padding:5px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${placeList[i].place_name}</div>`,
+          content: `<a style="text-decoration:none;color:black;cursor:pointer;" href=${'https://map.kakao.com/link/to/'+placeList[i].id}><div style="display:flex;font-color:black;border-radius:10px;font-size:12px;background-color:white;padding:5px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;border-style:solid;border-color:orange">${placeList[i].place_name}</div></a>`,
           map: kakaoMap,
           position: latlng,
         });
-        overlay.setMap(kakaoMap);
+        if (placeOverlay){
+          placeOverlay.setMap(null);
+        }
+        
+        setPlaceOverlay(() => overlay);
 
         // // LatLngBounds 객체에 좌표를 추가합니다
       }
@@ -222,15 +248,29 @@ export default function MapContainer() {
 
   useEffect(() => {
     if (placeList.length > 0) {
-      putPlaceMarker();
+      putPlaceMarker(placeIndex);
     }
-  }, [placeList]);
+  }, [placeList,placeIndex]);
 
   useEffect(() => {
     if (placeList.length > 0 && tempuser.length > 0) {
       drawingPath(placeIndex);
     }
   }, [tempuser, placeList, placeIndex]);
+
+  useEffect(()=> {
+    if(polylines.length>0&&kakaoMap){
+      polylines.map((line) => line.setMap(kakaoMap))
+    }
+  },[polylines])
+
+  useEffect(() => {
+    if(placeOverlay){
+      placeOverlay.setMap(kakaoMap);
+    }
+  },[placeOverlay])
+
+
 
   async function findApi(){
     console.log('axios start')
@@ -273,7 +313,7 @@ export default function MapContainer() {
         marginBottom:'50px',
         
       }}>
-        <InformationSlider placeList={placeList}/>
+        <InformationSlider placeList={placeList} setPlaceIndex={setPlaceIndex}/>
         
       </div>
     </StyledContainer>

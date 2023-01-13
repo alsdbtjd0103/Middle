@@ -5,7 +5,8 @@ import Slider from "react-slick";
 import styled from "styled-components";
 import InformationBox from "./InformationBox";
 
-export default function InformationSlider({placeList}) {
+export default function InformationSlider({placeList,setPlaceIndex}) {
+    
   const settings = {
     infinite: false,
     speed: 500,
@@ -13,6 +14,7 @@ export default function InformationSlider({placeList}) {
     slidesToScroll: 1,
     arrows:false,
     dots:true,
+    afterChange:(index) => setPlaceIndex(index),
   };
 
   
@@ -21,7 +23,7 @@ export default function InformationSlider({placeList}) {
     <Slider {...settings}>
         {placeList.map((place,index) => {
             if(index<6){
-            return <InformationBox key={index} place={place.place_name} address={place.address_name}/>
+            return <InformationBox key={index} place={place}/>
         }
         })}
       
