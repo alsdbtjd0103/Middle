@@ -112,7 +112,7 @@ export default function MapContainer() {
               if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
                 // setNoPlace(true);
                 // console.log("No Place");
-                console.log(radius);
+                
                 if (radius > 10000) {
                   console.log("중간 지점 장소가 없습니다.");
                 }
@@ -202,7 +202,7 @@ export default function MapContainer() {
   }
 
   function putPlaceMarker(placeIndex) {
-    console.log(placeList)
+    
     window.kakao.maps.load(() => {
       for (var i = 0; i < placeList.length; i++) {
         // 배열의 좌표들이 잘 보이게 마커를 지도에 추가합니다

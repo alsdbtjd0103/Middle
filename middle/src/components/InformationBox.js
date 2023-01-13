@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { UserContext } from "../store/UserContext";
 
 export default function InformationBox({ place, distance }) {
-    console.log('ㅁㄴㅇ');
+
     const userCtx = useContext(UserContext);
     const users = userCtx.users;
     
@@ -45,7 +45,6 @@ const markerColor = {
 const UserContainer = styled.div`
     display: flex;
     align-items: center;
-    
     flex-wrap: wrap;
 `
 
