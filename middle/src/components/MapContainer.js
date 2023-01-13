@@ -7,6 +7,9 @@ import { UserContext } from "../store/UserContext";
 import { Average_Algorithm } from "../util/Mid_Algorithm";
 
 import axios from'axios';
+import InformationBox from "./InformationBox";
+import styled from "styled-components";
+import InformationSlider from "./InformationSlider";
 
 export default function MapContainer() {
   const userCtx = useContext(UserContext);
@@ -240,7 +243,7 @@ export default function MapContainer() {
   }
 
   return (
-    <>
+    <StyledContainer>
       {/* <div
         style={{
           borderStyle: "solid",
@@ -256,11 +259,32 @@ export default function MapContainer() {
       <div
         id="kakaoMap"
         style={{
-          width: "100%",
-          height: "100%",
-          zIndex: 1,
+          width: '95%',
+          height: "65%",
+          borderRadius:'20px',
+          zIndex:1,
+          margin:'10px 5px 5px 10px'
         }}
       ></div>
-    </>
+      <div style={{
+        width:'95%',
+        height:'30%',
+        marginTop:'10px',
+        marginBottom:'50px',
+        
+      }}>
+        <InformationSlider />
+        
+      </div>
+    </StyledContainer>
   );
 }
+
+const StyledContainer = styled.div`
+  display: flex;
+  width:100%;
+  height:100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`

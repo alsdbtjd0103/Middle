@@ -14,8 +14,8 @@ const StyleHeader = styled.div`
   display: flex;
   width: 100%;
   height: 40px;
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: white;
   text-align: center;
   justify-content: center;
   align-items: center;
