@@ -12,7 +12,7 @@ export default function FindHeader({onClick,title}) {
 
 const StyleHeader = styled.div`
   display: flex;
-  width: 100%;
+  width: 100vw;
   height: 40px;
   background-color: black;
   color: white;

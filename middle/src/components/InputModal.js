@@ -81,6 +81,7 @@ function InputModal({ isOpen, setOpen }) {
           height: "min-content",
           padding: 0,
           
+          
         },
         overlay: {
           position: "fixed",
@@ -151,7 +152,7 @@ function InputModal({ isOpen, setOpen }) {
 export default InputModal;
 
 const StyledInput = styled.input`
-  height: 20px;
+  height: 28px;
   border-width: 0px;
   border-bottom-width: 1px;
   border-style: solid;
@@ -161,9 +162,7 @@ const StyledInput = styled.input`
   font-size: 15px;
   outline: none;
   width:90%;
-  :hover {
-    box-shadow: 0 5px 5px -5px #b8f2f7;
-  }
+
 `;
 
 const StyledLabel = styled.label`

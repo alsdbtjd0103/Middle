@@ -152,7 +152,7 @@ const RootContainer = styled(motion.div)`
 `;
 const StyledHeader = styled.header`
   display: flex;
-  width: 100%;
+  width: 100vw;
   height: 50px;
   background-color: #030303;
   justify-content: center;
@@ -182,7 +182,7 @@ const ButtonContainer = styled.div`
 `;
 
 const SearchButton = styled.button`
-  width: 80%;
+  width: 80vw;
   height: 50px;
   background-color: black;
   color: white;
@@ -206,7 +206,7 @@ const StyledList = styled.ul`
 const StyledItem = styled.li`
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 100vw;
   padding: 5px 10px 5px 10px;
   margin: 0;
   justify-content: space-evenly;

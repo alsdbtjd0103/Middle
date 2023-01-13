@@ -299,16 +299,16 @@ export default function MapContainer() {
       <div
         id="kakaoMap"
         style={{
-          width: '95%',
-          height: "65%",
+          width: '95vw',
+          height: "65vw",
           borderRadius:'20px',
           zIndex:1,
           
         }}
       ></div>
       <div style={{
-        width:'95%',
-        height:'30%',
+        width:'95vw',
+        height:'30vw',
         marginTop:'20px',
         marginBottom:'50px',
         
