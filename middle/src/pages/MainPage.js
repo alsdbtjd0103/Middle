@@ -36,8 +36,8 @@ function MainPage() {
     
     <RootContainer 
     initial={{width:'0%'}}
-    animate={{width:'100%',}} 
-    exit={{x:window.innerWidth,transition:{duration:0.1}}}
+    animate={{width:'100%',transition:{duration:0.4}}} 
+    exit={{x:window.innerWidth,}}
     id="rootContainer">
       <StyledHeader>우리 지금 만나</StyledHeader>
       <Snowfall
@@ -57,7 +57,7 @@ function MainPage() {
       <ButtonContainer
         style={{ justifyContent: "flex-end", padding: "10px 20px 0px 0px" }}
       >
-        <AiFillPlusCircle size={50} onClick={ModalHandler}></AiFillPlusCircle>
+        <AiFillPlusCircle size={60} onClick={ModalHandler}></AiFillPlusCircle>
       </ButtonContainer>
       <StyledList>
         {userCtx.users.map((user) => {

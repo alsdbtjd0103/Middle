@@ -4,7 +4,7 @@ const app = express();
 const cheerio = require("cheerio");
 const axios = require("axios");
 const bodyParser = require("body-parser");
-const PORT = 4000;
+const PORT = 3000;
 app.use(express.json());
 
 var cors = require("cors");
@@ -33,12 +33,7 @@ app.post("/api/path", (req, res) => {
     const start = req.body.start.place_name.replace(' ','%20');
     const end = req.body.end.place_name.replace(' ','%20');
     
-  getHtml(start,end).then((html) => {
-    const $ = cheerio.load(html.data);
-    
-    let parentTag = $("span").text();
-    console.log(parentTag)
-  })
+//cheerio 대신 셀레니움으로 수정
   res.json("success");
 });
 

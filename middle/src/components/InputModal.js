@@ -116,8 +116,8 @@ function InputModal({ isOpen, setOpen }) {
                 }
               }}
             ></StyledInput>
-            <StyledBsSearch>
-              <BsSearch style={{ cursor: "pointer" }} onClick={searchHandler} size={15}/>
+            <StyledBsSearch style={{cursor: "pointer"}} onClick={searchHandler} >
+              <BsSearch style={{ }} size={15} />
             </StyledBsSearch>
           </div>
         </StyledLabel>
@@ -176,9 +176,12 @@ const StyledLabel = styled.label`
 
 const StyledBsSearch = styled.div`
   position: relative;
-  right: 20px;
+  right: 50px;
   top: 7px;
   border-style: none;
+  width:50px;
+  height:30px;
+  text-align: center;
 `;
 
 const StyledList = styled.ul`
