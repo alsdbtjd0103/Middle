@@ -300,7 +300,7 @@ export default function MapContainer() {
         id="kakaoMap"
         style={{
           width: '95vw',
-          height: "65vw",
+          height: "65vh",
           borderRadius:'20px',
           zIndex:1,
           
@@ -308,7 +308,7 @@ export default function MapContainer() {
       ></div>
       <div style={{
         width:'95vw',
-        height:'30vw',
+        height:'35vh',
         marginTop:'20px',
         marginBottom:'50px',
         
@@ -324,7 +324,7 @@ const StyledContainer = styled.div`
   display: flex;
   width:100%;
   height:100%;
-  justify-content: center;
+
   align-items: center;
   flex-direction: column;
 `
