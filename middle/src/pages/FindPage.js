@@ -40,7 +40,7 @@ function FindPage(){
     return(
         <StyledContainer
         initial={{x:window.innerWidth}}
-        animate={{x:0,transition:{duration:0.3}}} 
+        animate={{x:0,transition:{duration:0.4}}} 
         // exit={{x:0,transition:{duration:0.1}}}
         >
             <FindHeader onClick={goBack} title={'중간장소 찾기'}/>
