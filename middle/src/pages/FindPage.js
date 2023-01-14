@@ -1,6 +1,6 @@
 
 import { useContext, useEffect,useState } from 'react';
-import { useNavigate, } from 'react-router-dom';
+import { useNavigate, useParams, } from 'react-router-dom';
 import styled from 'styled-components';
 import FindHeader from '../components/FindHeader';
 import MapContainer from '../components/MapContainer';
@@ -11,8 +11,10 @@ import {motion} from 'framer-motion';
 function FindPage(){
     const userCtx = useContext(UserContext);
     const navigation=useNavigate();
-
+   
+  
     function goBack(){
+        userCtx.setIsButtonClick(true);
         navigation(-1); 
     }
 
@@ -30,6 +32,10 @@ function FindPage(){
     })
 
     useEffect(() => {
+        userCtx.setIsButtonClick(false);
+    },[])
+
+    useEffect(() => {
         const script = document.createElement("script");
         script.src = "https://developers.kakao.com/sdk/js/kakao.js";
         script.async = true;
@@ -39,8 +45,8 @@ function FindPage(){
 
     return(
         <StyledContainer
-        initial={{x:window.innerWidth}}
-        animate={{x:0,transition:{duration:0.4}}} 
+        initial={userCtx.isButtonClick ? {x:window.innerWidth} : false}
+        animate={userCtx.isButtonClick ? {x:0,transition:{duration:0.4}} : false} 
         // exit={{x:0,transition:{duration:0.1}}}
         >
             <FindHeader onClick={goBack} title={'중간장소 찾기'}/>

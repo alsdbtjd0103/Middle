@@ -6,39 +6,47 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import Snowfall from "react-snowfall";
-import {motion} from 'framer-motion';
-
+import { motion } from "framer-motion";
 
 function MainPage() {
-  
   const userCtx = useContext(UserContext);
   const [open, setOpen] = useState(false);
-  
   const navigation = useNavigate();
   const ModalHandler = () => {
     setOpen((previous) => !previous);
   };
+
+  useEffect(() => { //버튼을 클릭하지않고 디바이스 기능을 이용하여 뒤로 갈 때 애니메이션 방지
+    userCtx.setIsButtonClick(false);
+  },[])
 
   const submitHandler = (e) => {
     if (userCtx.users.length < 2) {
       alert("두 개 이상 등록해주세요!");
       return;
     }
+   userCtx.setIsButtonClick(true);
     var queryString = "/find";
     // userCtx.users.map((user) => queryString+=`id=${user.info.id}&`)
     // queryString = queryString.substring(0,queryString.length-1);
     // console.log(queryString);
     navigation(queryString);
+    
     return;
   };
 
   return (
-    
-    <RootContainer 
-    initial={{width:'0%'}}
-    animate={{width:'100%',transition:{duration:0.4}}} 
-    exit={{x:window.innerWidth,}}
-    id="rootContainer">
+    <RootContainer
+      initial={userCtx.isButtonClick ? { width: "0%" } : false}
+      animate={
+        userCtx.isButtonClick 
+          ? { width: "100%", transition: { duration: 0.4 } }
+          : false
+      }
+      exit={userCtx.isButtonClick ? { x: window.innerWidth } : false}
+      
+      id="rootContainer"
+    >
       <StyledHeader>우리 지금 만나</StyledHeader>
       <Snowfall
         style={{}}
@@ -129,11 +137,10 @@ function MainPage() {
         })}
       </StyledList>
 
-      <ButtonContainer style={{position:'fixed',bottom:0}}>
+      <ButtonContainer style={{ position: "fixed", bottom: 0 }}>
         <SearchButton onClick={submitHandler}>중간 찾기</SearchButton>
       </ButtonContainer>
     </RootContainer>
-    
   );
 }
 
@@ -178,13 +185,11 @@ const ButtonContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
-  @media(min-width: 800px) {
+  @media (min-width: 800px) {
     &:hover {
-    opacity: 0.75;
+      opacity: 0.75;
+    }
   }
-    
-  }
-
 `;
 
 const SearchButton = styled.button`

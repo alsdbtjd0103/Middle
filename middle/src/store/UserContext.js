@@ -6,10 +6,13 @@ export const UserContext = createContext({
   addUser: (id, name, region) => {},
   getNextId:() => {},
   reset:() => {},
+  isButtonClick:false,
+  setIsButtonClick: () => {}
 });
 
 function UserContextProvider({ children }) {
   const [users, setUsers] = useState([]);
+  const [isButtonClick,setIsButtonClick] = useState(false) ;
 
   function reset(){
     setUsers([]);
@@ -46,6 +49,8 @@ function UserContextProvider({ children }) {
     addUser:addUser,
     getNextId:getNextId,
     reset:reset,
+    isButtonClick:isButtonClick,
+    setIsButtonClick:setIsButtonClick,
   };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
