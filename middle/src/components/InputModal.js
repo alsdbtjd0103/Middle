@@ -176,7 +176,8 @@ const StyledLabel = styled.label`
 
 const StyledBsSearch = styled.div`
   position: relative;
-  right: 50px;
+  right: 5%;
+  
   top: 7px;
   border-style: none;
   width:50px;
