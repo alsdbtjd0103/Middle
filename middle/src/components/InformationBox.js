@@ -32,13 +32,13 @@ export default function InformationBox({ place, distance }) {
         display:'flex',
         
       }}>
-      <StyledButton href={link}>
+      <StyledButton href={link} target='_blank'>
       <IoNavigateCircleOutline style={{paddingRight:'3px'}} color="black" size={22}></IoNavigateCircleOutline>
         길찾기
         </StyledButton>
       <StyledButton>|</StyledButton>
       
-      <StyledButton onClick={() => ShareKakao(link,`${place.place_name}`)}>
+      <StyledButton onClick={() => ShareKakao(link,`${place.place_name}`,userCtx.users)}>
       <RiKakaoTalkFill  style={{paddingRight:'3px'}} color="black" size={22}/>
         공유하기</StyledButton>
       </div>
