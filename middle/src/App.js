@@ -15,6 +15,7 @@ function App() {
   });
   
   return (
+    <div className=" bg-seoul">
     <UserContextProvider>
       <AnimatePresence onExitComplete={true}>
       <BrowserRouter>
@@ -27,6 +28,7 @@ function App() {
       </BrowserRouter>
       </AnimatePresence>
     </UserContextProvider>
+    </div>
   );
 }
 

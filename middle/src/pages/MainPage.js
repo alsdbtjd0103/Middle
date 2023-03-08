@@ -7,6 +7,7 @@ import { FiX } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import Snowfall from "react-snowfall";
 import { motion } from "framer-motion";
+import {MdDelete} from 'react-icons/md';
 
 function MainPage() {
   const userCtx = useContext(UserContext);
@@ -47,17 +48,19 @@ function MainPage() {
       
       id="rootContainer"
     >
-      <StyledHeader>우리 지금 만나</StyledHeader>
+      <StyledHeader>
+       <span className="text-white font-bold">NowMeet: 우리 지금 만나</span>
+      </StyledHeader>
       <Snowfall
-        style={{}}
+        style={{color:'#f1f1f1'}}
         snowflakeCount={100}
         wind={[-0.1, 0.1]}
         speed={[1.0, 2.0]}
       />
 
       <BannerText>
-        <span>우리 . . .</span>
-        <span>지금 만나</span>
+        <span>사람들과의</span>
+        <span>약속 장소를 찾아보세요!</span>
       </BannerText>
 
       <InputModal isOpen={open} setOpen={ModalHandler} />
@@ -65,8 +68,9 @@ function MainPage() {
       <ButtonContainer
         style={{ justifyContent: "flex-end", padding: "10px 20px 0px 0px" }}
       >
-        <AiFillPlusCircle size={60} onClick={ModalHandler}></AiFillPlusCircle>
+        <AiFillPlusCircle color="#f3f3f3" size={60} onClick={ModalHandler}></AiFillPlusCircle>
       </ButtonContainer>
+      <div style={{width:'100%',display:'flex', justifyContent:'center',alignItems:'center'}}>
       <StyledList>
         {userCtx.users.map((user) => {
           const deleteHandler = () => {
@@ -77,7 +81,7 @@ function MainPage() {
               <div
                 style={{
                   textAlign: "center",
-                  width: "100px",
+                  width: "70px",
                   overflow: "hidden",
                   padding: "5px 10px 5px 10px",
                   borderRadius: "30px",
@@ -91,7 +95,7 @@ function MainPage() {
                     overflow: "hidden",
                     width: "100%",
                     color: "white",
-                    fontSize: "14px",
+                    fontSize: "12px",
                   }}
                 >
                   {user.name}
@@ -100,7 +104,7 @@ function MainPage() {
               <div
                 style={{
                   textAlign: "center",
-                  width: "200px",
+                  width: "150px",
                   overflow: "hidden",
                   padding: "5px 10px 5px 10px",
                   borderRadius: "30px",
@@ -115,7 +119,7 @@ function MainPage() {
                     overflow: "hidden",
                     width: "100%",
                     color: "black",
-                    fontSize: "14px",
+                    fontSize: "12px",
                   }}
                 >
                   {user.region}
@@ -126,17 +130,17 @@ function MainPage() {
                   display: "flex",
                   justifyContents: "center",
                   alignItems: "center",
-                  width: "20px",
+                  width: "30px",
                   cursor: "pointer",
                 }}
               >
-                <FiX size={20} onClick={deleteHandler}></FiX>
+                <MdDelete color="black" size={22} onClick={deleteHandler}></MdDelete>
               </div>
             </StyledItem>
           );
         })}
       </StyledList>
-
+      </div>
       <ButtonContainer style={{ position: "fixed", bottom: 0 }}>
         <SearchButton onClick={submitHandler}>중간 찾기</SearchButton>
       </ButtonContainer>
@@ -155,18 +159,22 @@ const RootContainer = styled(motion.div)`
   top: 0;
   left: 0;
   box-sizing: border-box;
-  background-color: white;
-
+  background-image: url('image/seoul.png');
   scroll-behavior: none;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color:gray;
+  background-blend-mode:difference;
+  
 `;
 const StyledHeader = styled.header`
   display: flex;
   width: 100vw;
   height: 50px;
-  background-color: #030303;
   justify-content: center;
   align-items: center;
   color: white;
+  font-weight: bold;
 `;
 
 const BannerText = styled.div`
@@ -177,7 +185,7 @@ const BannerText = styled.div`
   padding: 20px;
   height: 200px;
   color: white;
-  background-color: black;
+  font-weight: semibold;
 `;
 
 const ButtonContainer = styled.div`
@@ -189,6 +197,9 @@ const ButtonContainer = styled.div`
     &:hover {
       opacity: 0.75;
     }
+  }
+  :active{
+    opacity: 0.75;
   }
 `;
 
@@ -205,20 +216,26 @@ const SearchButton = styled.button`
 
 const StyledList = styled.ul`
   display: flex;
-  width: 100%;
+  width: 90%;
   padding: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
   list-style-type: none;
   flex-direction: column;
   margin-top: 10px;
   overflow: scroll;
   height: 30vh;
+  background-color: white;
+  border-radius:30px;
+  opacity: 0.9;
+  box-shadow: 10px 10px 10px 0px;
 `;
 
 const StyledItem = styled.li`
   display: flex;
   flex-direction: row;
-  width: 100vw;
-  padding: 5px 10px 5px 10px;
+  width: 100%;
   margin: 0;
-  justify-content: space-evenly;
+  padding-bottom: 12px;
+  justify-content: space-around;
 `;
