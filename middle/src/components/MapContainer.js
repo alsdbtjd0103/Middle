@@ -95,6 +95,7 @@ export default function MapContainer() {
             location: coord,
             sort: window.kakao.maps.services.SortBy.DISTANCE,
           });
+          console.log(ps)
 
           // 키워드 검색 완료 시 호출되는 콜백함수 입니다
 

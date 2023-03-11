@@ -142,7 +142,7 @@ function MainPage() {
       </StyledList>
       </div>
       <ButtonContainer style={{ position: "fixed", bottom: 0 }}>
-        <SearchButton onClick={submitHandler}>중간 찾기</SearchButton>
+        <SearchButton onClick={submitHandler}>중간 ₩찾기</SearchButton>
       </ButtonContainer>
     </RootContainer>
   );
@@ -204,7 +204,7 @@ const ButtonContainer = styled.div`
 `;
 
 const SearchButton = styled.button`
-  width: 80vw;
+  width: 90vw;
   height: 50px;
   background-color: black;
   color: white;
@@ -228,7 +228,7 @@ const StyledList = styled.ul`
   background-color: white;
   border-radius:30px;
   opacity: 0.9;
-  box-shadow: 10px 10px 10px 0px;
+  box-shadow: 5px 5px 5px 0px;
 `;
 
 const StyledItem = styled.li`
