@@ -142,7 +142,7 @@ function MainPage() {
       </StyledList>
       </div>
       <ButtonContainer style={{ position: "fixed", bottom: 0 }}>
-        <SearchButton onClick={submitHandler}>중간 ₩찾기</SearchButton>
+        <SearchButton onClick={submitHandler}>중간 찾기</SearchButton>
       </ButtonContainer>
     </RootContainer>
   );
