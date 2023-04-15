@@ -61,7 +61,7 @@ function MainPage() {
       <InputModal isOpen={open} setOpen={ModalHandler} />
 
       <ButtonContainer
-        style={{ justifyContent: "flex-end", padding: "10px 20px 0px 0px" }}
+        style={{ justifyContent: "flex-end", padding: "10px 0px 0px 0px" }}
       >
         <AiFillPlusCircle
           color="#001A5B"
@@ -151,7 +151,7 @@ function MainPage() {
           })}
         </StyledList>
       </div>
-      <ButtonContainer style={{ position: "fixed", bottom: 0 }}>
+      <ButtonContainer style={{ position: "fixed", bottom: 0, left: 1 / 2 }}>
         <SearchButton onClick={submitHandler}>중간 찾기</SearchButton>
       </ButtonContainer>
     </RootContainer>
@@ -173,6 +173,7 @@ const RootContainer = styled(motion.div)`
   background-attachment: fixed;
   background-size: cover;
   background-color: #f5f5f5;
+  padding: 0px 20px 0px 20px;
 `;
 const StyledHeader = styled.header`
   display: flex;
@@ -189,7 +190,6 @@ const BannerText = styled.div`
   width: 100%;
   flex-direction: column;
   justify-content: space-evenly;
-  padding-left: 20px;
   height: 200px;
   color: black;
   font-weight: semibold;
@@ -223,7 +223,7 @@ const SearchButton = styled.button`
 
 const StyledList = styled.ul`
   display: flex;
-  width: 90%;
+  width: 100%;
   padding: 0;
   padding-top: 15px;
   padding-bottom: 15px;
