@@ -9,33 +9,30 @@ import { GetAddressList } from "../util/Map_Util";
 
 ReactModal.setAppElement("#root");
 
-
 function InputModal({ isOpen, setOpen }) {
   const userCtx = useContext(UserContext);
   const [defaultName, setDefaultName] = useState("user" + userCtx.getNextId());
   const [name, setName] = useState("");
   const [region, setRegion] = useState("");
-  const [info,setInfo] = useState({});
+  const [info, setInfo] = useState({});
   const [regionList, setRegionList] = useState([]);
-  const [isSelected,setIsSelected] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
   useEffect(() => {
-    if (region){
-      if(!name){
-      setName(defaultName);
-    }
+    if (region) {
+      if (!name) {
+        setName(defaultName);
+      }
       submitHandler();
     }
-  },[isSelected]);
+  }, [isSelected]);
 
   useEffect(() => {
-    setDefaultName('user'+userCtx.getNextId());
-  },[isOpen]);
-
+    setDefaultName("user" + userCtx.getNextId());
+  }, [isOpen]);
 
   const addUser = async () => {
     const nextId = userCtx.getNextId();
-    userCtx.addUser(nextId, name, region,info);
-    
+    userCtx.addUser(nextId, name, region, info);
   };
 
   const reset = () => {
@@ -48,7 +45,7 @@ function InputModal({ isOpen, setOpen }) {
 
   const submitHandler = async () => {
     if (region) {
-      if (!name){
+      if (!name) {
         setName(defaultName);
       }
 
@@ -61,7 +58,7 @@ function InputModal({ isOpen, setOpen }) {
 
   const searchHandler = () => {
     setRegionList([]);
-    GetAddressList(region,setRegionList);
+    GetAddressList(region, setRegionList);
   };
 
   return (
@@ -80,8 +77,6 @@ function InputModal({ isOpen, setOpen }) {
           flexDirection: "column",
           height: "min-content",
           padding: 0,
-          
-          
         },
         overlay: {
           position: "fixed",
@@ -93,7 +88,7 @@ function InputModal({ isOpen, setOpen }) {
         },
       }}
     >
-      <form style={{ padding: "20px 20px 0px 20px"}}>
+      <form style={{ padding: "20px 20px 0px 20px" }}>
         <StyledLabel>
           이름
           <StyledInput
@@ -105,19 +100,29 @@ function InputModal({ isOpen, setOpen }) {
         </StyledLabel>
         <StyledLabel>
           지역
-          <div style={{ display: "flex", flexDirection: "row",padding:0,margin:0}}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              padding: 0,
+              margin: 0,
+            }}
+          >
             <StyledInput
               type={"text"}
               onChange={(e) => setRegion((previous) => e.target.value)}
               value={region}
               onKeyPress={(e) => {
-                if(e.key=='Enter'){
+                if (e.key == "Enter") {
                   searchHandler();
                 }
               }}
             ></StyledInput>
-            <StyledBsSearch style={{cursor: "pointer"}} onClick={searchHandler} >
-              <BsSearch style={{ }} size={15} />
+            <StyledBsSearch
+              style={{ cursor: "pointer" }}
+              onClick={searchHandler}
+            >
+              <BsSearch style={{}} size={15} />
             </StyledBsSearch>
           </div>
         </StyledLabel>
@@ -125,18 +130,21 @@ function InputModal({ isOpen, setOpen }) {
       <StyledList>
         {regionList.map((place, index) => {
           return (
-            <StyledLi key={index} onClick={async () => {
-              const setting = async () => {
-                setRegion(place.place_name);
-                setInfo(place);
-                if(!name){
-                  setName(defaultName);
-                }
-              }
-              await setting();
-              
-              setIsSelected(true);
-            }}>
+            <StyledLi
+              key={index}
+              onClick={async () => {
+                const setting = async () => {
+                  setRegion(place.place_name);
+                  setInfo(place);
+                  if (!name) {
+                    setName(defaultName);
+                  }
+                };
+                await setting();
+
+                setIsSelected(true);
+              }}
+            >
               <StyledItem>
                 <span style={{ fontSize: "15px" }}>{place.place_name}</span>
                 <span style={{ fontSize: "13px" }}>{place.address_name}</span>
@@ -161,8 +169,7 @@ const StyledInput = styled.input`
   margin-top: 10px;
   font-size: 15px;
   outline: none;
-  width:90%;
-
+  width: 90%;
 `;
 
 const StyledLabel = styled.label`
@@ -171,17 +178,15 @@ const StyledLabel = styled.label`
   flex-direction: column;
   color: gray;
   height: 70px;
-  
 `;
 
 const StyledBsSearch = styled.div`
   position: relative;
   right: 5%;
-  
   top: 7px;
   border-style: none;
-  width:50px;
-  height:30px;
+  width: 50px;
+  height: 30px;
   text-align: center;
 `;
 
@@ -192,8 +197,7 @@ const StyledList = styled.ul`
   list-style-type: none;
   max-height: 150px;
   overflow: scroll;
-  :hover{
-
+  :hover {
   }
 `;
 
