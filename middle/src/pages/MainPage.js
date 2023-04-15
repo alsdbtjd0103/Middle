@@ -172,7 +172,7 @@ const RootContainer = styled(motion.div)`
   scroll-behavior: none;
   background-attachment: fixed;
   background-size: cover;
-  background-color: #f5f5f5;
+  background-color: #f9f9f9;
   padding: 0px 20px 0px 20px;
 `;
 const StyledHeader = styled.header`
